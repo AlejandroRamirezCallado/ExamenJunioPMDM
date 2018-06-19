@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.alejandro.examenjuniopmdm.FBObjects.Mensaje;
+
 import java.util.ArrayList;
 
 /**
@@ -13,9 +15,9 @@ import java.util.ArrayList;
  */
 
 public class ListaMensajesAdapter extends RecyclerView.Adapter<MensajeViewHolder> {
-    private ArrayList<String> mensajes;
+    private ArrayList<Mensaje> mensajes;
 
-    public ListaMensajesAdapter(ArrayList<String> mensajes){
+    public ListaMensajesAdapter(ArrayList<Mensaje> mensajes){
         this.mensajes=mensajes;
 
     }
@@ -33,7 +35,7 @@ public class ListaMensajesAdapter extends RecyclerView.Adapter<MensajeViewHolder
 
     @Override
     public void onBindViewHolder(MensajeViewHolder holder, int position) {
-        holder.textomensaje.setText(mensajes.get(position));
+        holder.textomensaje.setText(mensajes.get(position).original);
 
     }
 

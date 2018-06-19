@@ -4,11 +4,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.alejandro.examenjuniopmdm.FBObjects.Mensaje;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.GenericTypeIndicator;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 public class SecondActivity extends AppCompatActivity {
 
-    ListaMensajesFragment listaMensajeFragment;
+    public ListaMensajesFragment listaMensajesFragment;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,9 +25,10 @@ public class SecondActivity extends AppCompatActivity {
         SecondActivityEvents events = new SecondActivityEvents(this);
         DataHolder.instance.fireBaseAdmin.setListener(events);
 
-        listaMensajeFragment=(ListaMensajesFragment)getSupportFragmentManager().findFragmentById(R.id.fragmentListaMensajes);
+        listaMensajesFragment=(ListaMensajesFragment)getSupportFragmentManager().findFragmentById(R.id.fragmentListaMensajes);
 
         DataHolder.instance.fireBaseAdmin.descargarYObservarRama("messages");
+
 
 
 //        Log.v("SecondActivity", "-----Email usuario" +  DataHolder.instance.fireBaseAdmin);
@@ -51,6 +59,16 @@ class SecondActivityEvents implements FireBaseAdminListener{
     public void fireBaseAdmin_RamaDescargargada(String rama, DataSnapshot dataSnapshot) {
 
         Log.v("SecondActivity", rama + "--------"+dataSnapshot);
+
+        //Mensaje mensaje = dataSnapshot.getValue(Mensaje.class);
+
+        GenericTypeIndicator<Map<String,Mensaje>> indicator = new GenericTypeIndicator<Map<String,Mensaje>>(){};
+        Map<String,Mensaje> msgs=dataSnapshot.getValue(indicator);
+        Log.v("SecondActivity", "OBJETO MENSAJE TIENE: " + msgs);
+
+        ListaMensajesAdapter listaMensajesAdapter = new ListaMensajesAdapter(new ArrayList<Mensaje>(msgs.values()));
+        secondActivity.listaMensajesFragment.recyclerView.setAdapter(listaMensajesAdapter);
+
 
     }
 }
