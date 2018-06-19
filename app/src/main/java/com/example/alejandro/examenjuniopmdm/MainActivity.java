@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 }
-class MainActivityEvents implements LoginFragmentListener, RegisterFragmentListener {
+class MainActivityEvents implements LoginFragmentListener, RegisterFragmentListener, FireBaseAdminListener {
 
     MainActivity mainActivity;
     public MainActivityEvents(MainActivity mainActivity){
