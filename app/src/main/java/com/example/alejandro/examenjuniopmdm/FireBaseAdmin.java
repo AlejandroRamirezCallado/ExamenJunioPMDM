@@ -28,7 +28,7 @@ public class FireBaseAdmin {
         this.listener=listener;
     }
     public void registerConEmailYPassword(String email, String pass, Activity activity){
-        mAuth.signInWithEmailAndPassword(email, pass)
+        mAuth.createUserWithEmailAndPassword(email, pass)
                 .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
