@@ -10,7 +10,7 @@ public class MainActivity extends AppCompatActivity {
 
     LoginFragment loginFragment;
     RegisterFragment registerFragment;
-    FireBaseAdmin fireBaseAdmin;
+    //FireBaseAdmin fireBaseAdmin;
 
 
     @Override
@@ -23,17 +23,20 @@ public class MainActivity extends AppCompatActivity {
         registerFragment=(RegisterFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentRegister);
         MainActivityEvents mainActivityEvents=new MainActivityEvents(this);
 
-        fireBaseAdmin = new FireBaseAdmin();
+        //fireBaseAdmin = new FireBaseAdmin();
 
         loginFragment.setListener(mainActivityEvents);
         registerFragment.setListener(mainActivityEvents);
-        fireBaseAdmin.setListener(mainActivityEvents);
+        DataHolder.instance.fireBaseAdmin.setListener(mainActivityEvents);
+       // fireBaseAdmin.setListener(mainActivityEvents);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.show(loginFragment);
         transaction.hide(registerFragment);
         transaction.commit();
 
+        //Sirve para entrar sin logearte
+        DataHolder.instance.fireBaseAdmin.loginConEmailYPassword("test@test.com", "1234567890", this);
 
 
 
@@ -49,7 +52,7 @@ class MainActivityEvents implements LoginFragmentListener, RegisterFragmentListe
 
     @Override
     public void loginFragmentLoginButtonClicked(String sUser, String sPassword) {
-        mainActivity.fireBaseAdmin.loginConEmailYPassword(sUser,sPassword, mainActivity);
+        DataHolder.instance.fireBaseAdmin.loginConEmailYPassword(sUser,sPassword, mainActivity);
     }
 
     @Override
@@ -63,7 +66,7 @@ class MainActivityEvents implements LoginFragmentListener, RegisterFragmentListe
 
     @Override
     public void registerFragmentBtnAceptarClicked(String sUser, String sPass) {
-        mainActivity.fireBaseAdmin.registerConEmailYPassword(sUser,sPass, mainActivity);
+        DataHolder.instance.fireBaseAdmin.registerConEmailYPassword(sUser,sPass, mainActivity);
 
     }
 
