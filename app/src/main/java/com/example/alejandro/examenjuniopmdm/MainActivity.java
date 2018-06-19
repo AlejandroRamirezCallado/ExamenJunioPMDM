@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        loginFragment=(RegisterFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentLogin);
+        loginFragment=(LoginFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentLogin);
         registerFragment=(RegisterFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentRegister);
         MainActivityEvents mainActivityEvents=new MainActivityEvents(this);
 
