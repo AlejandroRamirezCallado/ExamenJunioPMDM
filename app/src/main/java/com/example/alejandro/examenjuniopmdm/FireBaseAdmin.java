@@ -7,6 +7,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
 /**
@@ -16,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class FireBaseAdmin {
     private FirebaseAuth mAuth;
     public FireBaseAdminListener listener;
+    public FirebaseUser user;
 
     public FireBaseAdmin(){
 
@@ -38,7 +40,7 @@ public class FireBaseAdmin {
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (task.isSuccessful()) {
-
+                            user = FirebaseAuth.getInstance().getCurrentUser();
                             listener.fireBaseAdmin_LoginOK(true);
                         }
                         else {
@@ -50,4 +52,27 @@ public class FireBaseAdmin {
                     }
                 });
     }
+
+    public void loginConEmailYPassword(String email, String pass, Activity activity) {
+        mAuth.signInWithEmailAndPassword(email, pass)
+                .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        //Log.d("FirebaseAdmin", "createUserWithEmail:onComplete:" + task.isSuccessful());
+
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+                        if (task.isSuccessful()) {
+                            user = FirebaseAuth.getInstance().getCurrentUser();
+                            listener.fireBaseAdmin_LoginOK(true);
+                        } else {
+                            listener.fireBaseAdmin_LoginOK(false);
+                        }
+
+
+                    }
+                });
+    }
+
 }

@@ -49,7 +49,7 @@ class MainActivityEvents implements LoginFragmentListener, RegisterFragmentListe
 
     @Override
     public void loginFragmentLoginButtonClicked(String sUser, String sPassword) {
-
+        mainActivity.fireBaseAdmin.loginConEmailYPassword(sUser,sPassword, mainActivity);
     }
 
     @Override
@@ -75,11 +75,26 @@ class MainActivityEvents implements LoginFragmentListener, RegisterFragmentListe
     @Override
     public void fireBaseAdmin_RegisterOK(boolean blOK) {
         Log.v("MAINACTIVITYEVENTS", "RESULTADO DE REGISTER" + blOK);
+        if (blOK){
+            Intent intent = new Intent(mainActivity, SecondActivity.class);
+            mainActivity.startActivity(intent);
+            mainActivity.finish();
+
+        }
 
     }
 
     @Override
     public void fireBaseAdmin_LoginOK(boolean blOK) {
+        Log.v("MAINACTIVITYEVENTS", "RESULTADO DE REGISTER" + blOK);
+        if (blOK){
+            Intent intent = new Intent(mainActivity, SecondActivity.class);
+            mainActivity.startActivity(intent);
+            mainActivity.finish();
+
+
+        }
+
 
     }
 }
