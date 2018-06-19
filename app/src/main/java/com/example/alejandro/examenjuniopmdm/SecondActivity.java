@@ -8,10 +8,20 @@ import com.google.firebase.database.DataSnapshot;
 
 public class SecondActivity extends AppCompatActivity {
 
+    ListaMensajesFragment listaMensajeFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
+
+        SecondActivityEvents events = new SecondActivityEvents(this);
+        DataHolder.instance.fireBaseAdmin.setListener(events);
+
+        listaMensajeFragment=(ListaMensajesFragment)getSupportFragmentManager().findFragmentById(R.id.fragmentListaMensajes);
+
+        DataHolder.instance.fireBaseAdmin.descargarYObservarRama("messages");
+
 
 //        Log.v("SecondActivity", "-----Email usuario" +  DataHolder.instance.fireBaseAdmin);
 
@@ -19,6 +29,12 @@ public class SecondActivity extends AppCompatActivity {
 }
 
 class SecondActivityEvents implements FireBaseAdminListener{
+
+    SecondActivity secondActivity;
+
+    public SecondActivityEvents(SecondActivity secondActivity){
+        this.secondActivity=secondActivity;
+    }
 
 
     @Override
@@ -33,6 +49,8 @@ class SecondActivityEvents implements FireBaseAdminListener{
 
     @Override
     public void fireBaseAdmin_RamaDescargargada(String rama, DataSnapshot dataSnapshot) {
+
+        Log.v("SecondActivity", rama + "--------"+dataSnapshot);
 
     }
 }

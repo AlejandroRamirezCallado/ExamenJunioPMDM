@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.google.firebase.database.DataSnapshot;
+
 public class MainActivity extends AppCompatActivity {
 
     LoginFragment loginFragment;
@@ -98,6 +100,10 @@ class MainActivityEvents implements LoginFragmentListener, RegisterFragmentListe
 
         }
 
+
+    }
+    @Override
+    public void fireBaseAdmin_RamaDescargargada(String rama, DataSnapshot dataSnapshot) {
 
     }
 }
