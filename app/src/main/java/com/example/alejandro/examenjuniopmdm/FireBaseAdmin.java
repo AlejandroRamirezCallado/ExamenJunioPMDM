@@ -27,7 +27,7 @@ public class FireBaseAdmin {
 
         this.listener=listener;
     }
-    public void loginConEmailYPassword(String email, String pass, Activity activity){
+    public void registerConEmailYPassword(String email, String pass, Activity activity){
         mAuth.signInWithEmailAndPassword(email, pass)
                 .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -39,9 +39,11 @@ public class FireBaseAdmin {
                         // signed in user can be handled in the listener.
                         if (task.isSuccessful()) {
 
+                            listener.fireBaseAdmin_LoginOK(true);
                         }
                         else {
-                            
+                            listener.fireBaseAdmin_LoginOK(false);
+
                         }
 
 

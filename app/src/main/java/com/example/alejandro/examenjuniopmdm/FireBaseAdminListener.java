@@ -5,4 +5,6 @@ package com.example.alejandro.examenjuniopmdm;
  */
 
 interface FireBaseAdminListener {
+    public void fireBaseAdmin_RegisterOK(boolean blOK);
+    public void fireBaseAdmin_LoginOK(boolean blOK);
 }

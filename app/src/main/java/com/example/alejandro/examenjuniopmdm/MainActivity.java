@@ -1,13 +1,16 @@
 package com.example.alejandro.examenjuniopmdm;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
 
     LoginFragment loginFragment;
     RegisterFragment registerFragment;
+    FireBaseAdmin fireBaseAdmin;
 
 
     @Override
@@ -20,8 +23,19 @@ public class MainActivity extends AppCompatActivity {
         registerFragment=(RegisterFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentRegister);
         MainActivityEvents mainActivityEvents=new MainActivityEvents(this);
 
+        fireBaseAdmin = new FireBaseAdmin();
+
         loginFragment.setListener(mainActivityEvents);
         registerFragment.setListener(mainActivityEvents);
+        fireBaseAdmin.setListener(mainActivityEvents);
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.show(loginFragment);
+        transaction.hide(registerFragment);
+        transaction.commit();
+
+
+
 
     }
 }
@@ -49,11 +63,23 @@ class MainActivityEvents implements LoginFragmentListener, RegisterFragmentListe
 
     @Override
     public void registerFragmentBtnAceptarClicked(String sUser, String sPass) {
+        mainActivity.fireBaseAdmin.registerConEmailYPassword(sUser,sPass, mainActivity);
 
     }
 
     @Override
     public void registerFragmentBtnCancelarClicked() {
+
+    }
+
+    @Override
+    public void fireBaseAdmin_RegisterOK(boolean blOK) {
+        Log.v("MAINACTIVITYEVENTS", "RESULTADO DE REGISTER" + blOK);
+
+    }
+
+    @Override
+    public void fireBaseAdmin_LoginOK(boolean blOK) {
 
     }
 }
