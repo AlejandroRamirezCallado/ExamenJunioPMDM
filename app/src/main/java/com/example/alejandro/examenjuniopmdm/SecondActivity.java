@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.alejandro.examenjuniopmdm.Adapters.ListaCochesAdapters;
 import com.example.alejandro.examenjuniopmdm.FBObjects.FBCoche;
 import com.example.alejandro.examenjuniopmdm.FBObjects.Mensaje;
 import com.google.firebase.database.DataSnapshot;
@@ -76,7 +77,7 @@ class SecondActivityEvents implements FireBaseAdminListener{
             Map<String,FBCoche> coches=dataSnapshot.getValue(indicator);
             Log.v("SecondActivity", "coches MENSAJE TIENE: " + coches);
 
-            ListaCochesAdapter listaCochesAdapter = new ListaCochesAdapter(coches);
+            ListaCochesAdapters listaCochesAdapter = new ListaCochesAdapters(coches);
             secondActivity.listaFragmentCoches.recyclerView.setAdapter(listaCochesAdapter);
 
         }

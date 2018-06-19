@@ -15,11 +15,11 @@ import java.util.ArrayList;
  * Created by alejandro on 19/6/18.
  */
 
-  class ListaCochesAdapter extends RecyclerView.Adapter<CocheViewHolder> {
+  public class ListaCochesAdapters extends RecyclerView.Adapter<CocheViewHolder> {
 
     private ArrayList<FBCoche> coches;
 
-    public ListaCochesAdapter(ArrayList<FBCoche> coches){
+    public ListaCochesAdapters(ArrayList<FBCoche> coches){
         this.coches=coches;
 
     }
